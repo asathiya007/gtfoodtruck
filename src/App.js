@@ -7,6 +7,7 @@ import Register from './components/Register';
 import Home from './components/Home';
 import MngBldgStn from './components/MngBldgStn';
 import MngFood from './components/MngFood';
+import MngFoodTruck from './components/MngFoodTruck';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route exact path="/home" component={Home} />
             <Route exact path="/mngbldgstn" component={MngBldgStn}/>
             <Route exact path="/mngfood" component={MngFood} />
+            <Route exact path="/mngft" component={MngFoodTruck} />
           </Switch>
         </div>
       </div>
