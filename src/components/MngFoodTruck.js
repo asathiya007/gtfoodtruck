@@ -325,9 +325,6 @@ const MngFoodTruck = props => {
                 </Modal.Footer>
             </Modal>
 
-
-
-
             <Modal show={updateFTShow} onHide={e => {setUpdFTShow(false)}}animation={false}>
                 <Modal.Header closeButton>
                     <p className="f3 fw6">Update Food Truck</p>

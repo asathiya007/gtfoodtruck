@@ -8,6 +8,9 @@ import Home from './components/Home';
 import MngBldgStn from './components/MngBldgStn';
 import MngFood from './components/MngFood';
 import MngFoodTruck from './components/MngFoodTruck';
+import FoodTruckSumm from './components/FoodTruckSumm';
+import Explore from './components/Explore';
+import CurrInfo from './components/CurrInfo';
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
             <Route exact path="/mngbldgstn" component={MngBldgStn}/>
             <Route exact path="/mngfood" component={MngFood} />
             <Route exact path="/mngft" component={MngFoodTruck} />
+            <Route exact path="/ftsumm" component={FoodTruckSumm} />
+            <Route exact path="/explore" component={Explore} />
+            <Route exact path="/currinfo" component={CurrInfo} />
           </Switch>
         </div>
       </div>
