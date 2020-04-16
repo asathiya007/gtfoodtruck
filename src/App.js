@@ -11,6 +11,7 @@ import MngFoodTruck from './components/MngFoodTruck';
 import FoodTruckSumm from './components/FoodTruckSumm';
 import Explore from './components/Explore';
 import CurrInfo from './components/CurrInfo';
+import OrderHist from './components/OrderHist';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route exact path="/ftsumm" component={FoodTruckSumm} />
             <Route exact path="/explore" component={Explore} />
             <Route exact path="/currinfo" component={CurrInfo} />
+            <Route exact path="/orderhist" component={OrderHist} />
           </Switch>
         </div>
       </div>

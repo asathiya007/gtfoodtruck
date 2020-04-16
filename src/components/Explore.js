@@ -1,55 +1,70 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Dropdown from 'react-bootstrap/Dropdown'; 
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 
-const Explore = props => {
+const Explore = () => {
 
-    // get from store
-    const buildings = [
-        'testBldg',
-        'testBldg1',
-        'testBldg2'
-    ];
+    const [state, setState] = useState({
+        buildings: [],
+        stations: [],
+        sites: []
+    }); 
+    const {buildings, stations, sites} = state; 
 
-    // get from store
-    const stations = [
-        'testStn',
-        'testStn1',
-        'testStn2'
-    ];
+    useEffect(() => {
+        // get from API call, hardcoded for now
+        const buildings = [
+            'testBldg',
+            'testBldg1',
+            'testBldg2'
+        ];
 
-    // get by filtering 
-    const sites = [
-        {
-            station: 'Station One',
-            building: 'Building One',
-            foodTrucks: [
-                'Food Truck One', 
-                'Food Truck Two', 
-                'Food Truck Three'
-            ], 
-            foods: [
-                'Apple', 
-                'Banana', 
-                'Orange', 
-                'Coffee'
-            ]
-        }, 
-        {
-            station: 'Station Two',
-            building: 'Building Two',
-            foodTrucks: [
-                'Food Truck Five', 
-                'Food Truck Seven'
-            ], 
-            foods: [
-                'Pie', 
-                'Chicken', 
-                'Waffle'
-            ]
-        }
-    ]; 
+        // get from API call, hardcoded for now
+        const stations = [
+            'testStn',
+            'testStn1',
+            'testStn2'
+        ];
+
+        // get from API call, hardcoded for now
+        const sites = [
+            {
+                station: 'Station One',
+                building: 'Building One',
+                foodTrucks: [
+                    'Food Truck One',
+                    'Food Truck Two',
+                    'Food Truck Three'
+                ],
+                foods: [
+                    'Apple',
+                    'Banana',
+                    'Orange',
+                    'Coffee'
+                ]
+            },
+            {
+                station: 'Station Two',
+                building: 'Building Two',
+                foodTrucks: [
+                    'Food Truck Five',
+                    'Food Truck Seven'
+                ],
+                foods: [
+                    'Pie',
+                    'Chicken',
+                    'Waffle'
+                ]
+            }
+        ]; 
+
+        setState({
+            buildings, 
+            stations, 
+            sites
+        }); 
+    }, [setState]); 
 
     const [filterData, setFilterData] = useState({
         bldgName: null,
@@ -80,7 +95,7 @@ const Explore = props => {
         setFilterData({ ...filterData, food: e.target.value });
     }
 
-    const [rowChoice, setRowChoice] = useState(sites[0] ? sites[0] : {}); 
+    const [rowChoice, setRowChoice] = useState(sites && sites[0] ? sites[0] : {}); 
 
     return (
         <div className="mw9 center ph3-ns">

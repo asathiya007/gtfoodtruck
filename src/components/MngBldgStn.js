@@ -1,23 +1,33 @@
-import React, {useState} from 'react'; 
+import React, {useState, useEffect} from 'react'; 
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 
-const MngBldgStn = props => {
-    // get from store
-    const buildings = [
-        'testBldg',
-        'testBldg1',
-        'testBldg2'
-    ];
+const MngBldgStn = () => {
+    const [state, setState] = useState({
+        buildings: [],
+        stations: []
+    });
+    const {buildings, stations} = state; 
 
-    // get from store
-    const stations = [
-        'testStn',
-        'testStn1',
-        'testStn2'
-    ];
+    useEffect(() => {
+        // get from API call, hardcoded here
+        const buildings = [
+            'testBldg',
+            'testBldg1',
+            'testBldg2'
+        ];
+
+        // get from API call, hardcoded here 
+        const stations = [
+            'testStn',
+            'testStn1',
+            'testStn2'
+        ];
+
+        setState({buildings, stations});
+    }, [setState]); 
 
     // get from store after filtering 
     const bldgsStns = [
@@ -53,7 +63,7 @@ const MngBldgStn = props => {
                 'Food Truck Four'
             ]
         }
-    ]
+    ]; 
 
     const [filterData, setFilterData] = useState({
         bldgName: null,
@@ -124,7 +134,7 @@ const MngBldgStn = props => {
 
                             <Dropdown.Menu>
                                 {
-                                    stations.map((station, i) => {
+                                    stations && stations.map((station, i) => {
                                         return <Dropdown.Item key={i} onClick={e => setStnName(station)}>{station}</Dropdown.Item>
                                     })
                                 }

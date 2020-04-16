@@ -1,42 +1,59 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 
 const FoodTruckSumm = () => {
-    const foodTrucks = [
-        {
-            name: 'Food Truck One',
-            orders: 30,
-            revenue: 1380, 
-            customers: 25
-        }
-    ]; 
+    const [state, setState] = useState({
+        foodTrucks: [],
+        stations: [],
+        ftSummDets: []
+    }); 
+    const {foodTrucks, stations, ftSummDets} = state; 
 
-    // get from store
-    const stations = [
-        'testStn',
-        'testStn1',
-        'testStn2'
-    ];
+    useEffect(() => {
+        // get from API call, hardcoded for now
+        const foodTrucks = [
+            {
+                name: 'Food Truck One',
+                orders: 30,
+                revenue: 1380,
+                customers: 25
+            }
+        ];
 
-    const ftSummDets = [
-        {
-            date: '2020-01-01',
-            customer: 'Customer One',
-            purchase: 13.5,
-            orders: 2,
-            food: 'Apple, Coffee'
-        },
-        {
-            date: '2020-01-01',
-            customer: 'Customer Two',
-            purchase: 3.99,
-            orders: 1,
-            food: 'Orange'
-        }
-    ]
+        // get from API call, hardcoded for now
+        const stations = [
+            'testStn',
+            'testStn1',
+            'testStn2'
+        ];
+
+        // get from API call, hardcoded for now
+        const ftSummDets = [
+            {
+                date: '2020-01-01',
+                customer: 'Customer One',
+                purchase: 13.5,
+                orders: 2,
+                food: 'Apple, Coffee'
+            },
+            {
+                date: '2020-01-01',
+                customer: 'Customer Two',
+                purchase: 3.99,
+                orders: 1,
+                food: 'Orange'
+            }
+        ];
+
+        setState({
+            stations, 
+            foodTrucks, 
+            ftSummDets
+        }); 
+    }, [setState]); 
 
     const [filterData, setFilterData] = useState({
         ftName: '',

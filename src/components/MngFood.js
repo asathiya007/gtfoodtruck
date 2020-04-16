@@ -1,25 +1,30 @@
-import React, {useState} from 'react'; 
+import React, {useState, useEffect} from 'react'; 
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 
-const MngFood = props => {
-    const foods = [
-        {
-            name: 'Apple',
-            menuCount: 10,
-            purchaseCount: 20
-        }, 
-        {
-            name: 'Orange',
-            menuCount: 7,
-            purchaseCount: 4
-        }
-    ]
+const MngFood = () => {
+    const [foods, setFoods] = useState([]);
+
+    useEffect(() => {
+        const foods = [
+            {
+                name: 'Apple',
+                menuCount: 10,
+                purchaseCount: 20
+            },
+            {
+                name: 'Orange',
+                menuCount: 7,
+                purchaseCount: 4
+            }
+        ]; 
+        setFoods(foods);
+    }, [setFoods]);
 
     const [foodName, setFoodName] = useState('');
-    const [rowChoice, setRowChoice] = useState(foods[0] ? foods[0] : {}); 
+    const [rowChoice, setRowChoice] = useState(foods && foods[0] ? foods[0] : {}); 
     const [createFoodShow, setCrtFoodShow] = useState(false);
 
     return (

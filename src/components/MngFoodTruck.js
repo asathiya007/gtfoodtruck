@@ -1,4 +1,4 @@
-import React, {useState} from 'react'; 
+import React, {useState, useEffect} from 'react'; 
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
@@ -7,35 +7,46 @@ import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 
 const MngFoodTruck = props => {
+    const [state, setState] = useState({
+        stations: [],
+        staff: [],
+        food: []
+    }); 
+    const {stations, staff, food} = state; 
 
-    // get from store
-    const stations = [
-        'testStn',
-        'testStn1',
-        'testStn2'
-    ];
+    useEffect(() => {
+        // get from API call, hardcoded for now
+        const stations = [
+            'testStn',
+            'testStn1',
+            'testStn2'
+        ];
 
-    // get from store 
-    const staff = [
-        {
-            name: 'Staff One'
-        },
-        {
-            name: 'Staff Two'
-        },
-        {
-            name: 'Staff Three'
-        },
-        {
-            name: 'Staff Four'
-        }
-    ]
+        // get from API call, hardcoded for now
+        const staff = [
+            {
+                name: 'Staff One'
+            },
+            {
+                name: 'Staff Two'
+            },
+            {
+                name: 'Staff Three'
+            },
+            {
+                name: 'Staff Four'
+            }
+        ]; 
 
-    // get from store 
-    const food = [
-        'Apple',
-        'Orange'
-    ]
+        // get from API call, hardcoded for now 
+        const food = [
+            'Apple',
+            'Orange'
+        ]; 
+
+        setState({stations, staff, food});
+        
+    }, [setState]);
 
     // get with filter data 
     const foodTrucks = [
@@ -53,7 +64,7 @@ const MngFoodTruck = props => {
             staffCount: 5, 
             menuItems: 15
         }
-    ]
+    ]; 
 
     const [filterData, setFilterData] = useState({
         ftName: null,
