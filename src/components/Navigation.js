@@ -32,7 +32,7 @@ const Navigation = props => {
     return (
       <div>
         <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
-          <Navbar.Brand className="f2 fw6 ml4">
+          <Navbar.Brand className="f2 fw6 ml4" href="/home">
             <span className="text-warning">GT Food Truck</span>
           </Navbar.Brand>
           <Nav className="ml-auto mr4">{showLinks()}</Nav>
