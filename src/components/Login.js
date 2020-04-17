@@ -1,12 +1,19 @@
 import React, {useState} from 'react'; 
 import Button from 'react-bootstrap/Button';
+import {login} from '../actions/auth';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
-const Login = () => {
-
+const Login = ({user, login}) => {
+    
     const [state, setState] = useState({
         username: '',
         password: ''
     }); 
+
+    if (user) {
+        return <Redirect to="/home"/>
+    }
 
     return (
         <div>
@@ -22,7 +29,11 @@ const Login = () => {
                     <input className="b pa2 input-reset ba bg-transparent hover-bg-black w-100" type="password" name="password"  id="password" onChange={e => setState({...state, password: e.target.value})}/>
                 </div>
                 <div className="w-100 flex justify-center">
-                    <Button variant="warning" className="f4 ph5">Login</Button>
+                    <Button variant="warning" className="f4 ph5" onClick={e => 
+                        {
+                            e.preventDefault(); 
+                            login(state); 
+                        }}>Login</Button>
                 </div>
             </form>
             </main>
@@ -30,4 +41,8 @@ const Login = () => {
     ); 
 }
 
-export default Login; 
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+}); 
+
+export default connect(mapStateToProps, {login})(Login); 

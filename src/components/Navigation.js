@@ -1,17 +1,19 @@
 import React, {Fragment} from 'react'; 
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import {connect} from 'react-redux';
+import {logout} from '../actions/auth';
 
-const Navigation = props => {
-
-    const user = null; 
-
+const Navigation = ({logout, user}) => { 
     const showLinks = () => {
         if (user) {
           return (
             <Fragment>
               <Nav.Link href="/" className="text-white">
-                <span className="gold-hover">Logout</span>
+                <span className="gold-hover" onClick={e => {
+                  e.preventDefault(); 
+                  logout(); 
+                }}>Logout</span>
               </Nav.Link>
             </Fragment>
           )
@@ -41,5 +43,9 @@ const Navigation = props => {
     );
 }
 
-export default Navigation; 
+const mapStateToProps = state => ({
+    user: state.auth.user
+}); 
+
+export default connect(mapStateToProps, {logout})(Navigation); 
 

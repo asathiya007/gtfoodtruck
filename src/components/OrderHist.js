@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Table from 'react-bootstrap/Table';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
-const OrderHist = () => {
+const OrderHist = ({user}) => {
     const [tableData, setTableData] = useState([]);
 
     useEffect(() => {
@@ -30,6 +32,10 @@ const OrderHist = () => {
 
         setTableData(tableData);
     }, [setTableData]); 
+
+    if (!user) {
+      return <Redirect to="/" />;
+    }
 
     return (
         <div>
@@ -73,4 +79,8 @@ const OrderHist = () => {
     ); 
 }
 
-export default OrderHist; 
+const mapStateToProps = state => ({
+    user: state.auth.user
+}); 
+
+export default connect(mapStateToProps)(OrderHist); 

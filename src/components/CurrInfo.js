@@ -2,8 +2,10 @@ import React, {useState, useEffect} from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
-const CurrInfo = () => {
+const CurrInfo = ({user}) => {
 
     const [state, setState] = useState({
         userData: null,
@@ -66,6 +68,10 @@ const CurrInfo = () => {
 
     const [rowChoice, setRowChoice] = useState(tableData && tableData[0] ? tableData[0] : {});
     const [showOrder, setShowOrder] = useState(false);
+
+    if (!user) {
+      return <Redirect to="/" />;
+    }
 
     return (
         <div className="mw9 center ph3-ns">
@@ -229,4 +235,8 @@ const CurrInfo = () => {
     );
 }
 
-export default CurrInfo; 
+const mapStateToProps = state => ({
+    user: state.auth.user
+}); 
+
+export default connect(mapStateToProps)(CurrInfo); 

@@ -5,8 +5,10 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
-const MngFoodTruck = props => {
+const MngFoodTruck = ({user}) => {
     const [state, setState] = useState({
         stations: [],
         staff: [],
@@ -134,6 +136,10 @@ const MngFoodTruck = props => {
         ]
     }); 
     const {updMenuItems} = updateFTData; 
+
+    if (!user) {
+      return <Redirect to="/" />;
+    }
 
     return (
         <div className="mw9 center ph3-ns">
@@ -432,4 +438,8 @@ const MngFoodTruck = props => {
     )
 }
 
-export default MngFoodTruck; 
+const mapStateToProps = state => ({
+    user: state.auth.user
+}); 
+
+export default connect(mapStateToProps)(MngFoodTruck); 

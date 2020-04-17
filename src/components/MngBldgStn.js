@@ -3,8 +3,10 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
-const MngBldgStn = () => {
+const MngBldgStn = ({user}) => {
     const [state, setState] = useState({
         buildings: [],
         stations: []
@@ -101,6 +103,10 @@ const MngBldgStn = () => {
     const [createStnShow, setCrtStnShow] = useState(false);
     const [updateBldgShow, setUpdBldgShow] = useState(false);
     const [updateStnShow, setUpdStnShow] = useState(false);
+
+    if (!user) {
+        return <Redirect to="/" />;
+    }
 
     return (
         <div className="mw9 center ph3-ns">
@@ -381,4 +387,8 @@ const MngBldgStn = () => {
     )
 }
 
-export default MngBldgStn; 
+const mapStateToProps = state => ({
+    user: state.auth.user
+}); 
+
+export default connect(mapStateToProps)(MngBldgStn); 

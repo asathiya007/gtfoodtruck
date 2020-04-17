@@ -3,8 +3,10 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
-const MngFood = () => {
+const MngFood = ({user}) => {
     const [foods, setFoods] = useState([]);
 
     useEffect(() => {
@@ -26,6 +28,10 @@ const MngFood = () => {
     const [foodName, setFoodName] = useState('');
     const [rowChoice, setRowChoice] = useState(foods && foods[0] ? foods[0] : {}); 
     const [createFoodShow, setCrtFoodShow] = useState(false);
+
+    if (!user) {
+      return <Redirect to="/" />;
+    }
 
     return (
         <div>
@@ -113,4 +119,8 @@ const MngFood = () => {
     )
 }
 
-export default MngFood; 
+const mapStateToProps = state => ({
+    user: state.auth.user
+}); 
+
+export default connect(mapStateToProps)(MngFood); 

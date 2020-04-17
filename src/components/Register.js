@@ -1,7 +1,10 @@
 import React, {useState} from 'react'; 
 import Button from 'react-bootstrap/Button';
+import {register} from '../actions/auth';
+import { connect } from "react-redux";
+import {Redirect} from 'react-router-dom';
 
-const Register = () => {
+const Register = ({user, register}) => {
     const [state, setState] = useState({
         username: '',
         email: '',
@@ -13,7 +16,10 @@ const Register = () => {
         role: ''
     }); 
 
-    console.log(state);
+    if (user) {
+        return <Redirect to="/home"/>
+    }
+
     return (
         <div>
             <main className="pa4 pb0 black-80">
@@ -57,7 +63,10 @@ const Register = () => {
                     <label htmlFor="staff" className="ml1">Staff</label>
                 </div>
                 <div className="w-100 flex justify-center">
-                    <Button variant="warning" className="f4 ph5">Login</Button>
+                    <Button variant="warning" className="f4 ph5" onClick={e => {
+                        e.preventDefault();
+                        register(state); 
+                    }}>Register</Button>
                 </div>
             </form>
             </main>
@@ -65,4 +74,8 @@ const Register = () => {
     ); 
 }
 
-export default Register; 
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps, {register})(Register); 

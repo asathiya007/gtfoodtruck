@@ -1,7 +1,14 @@
 import React from 'react'; 
 import Button from 'react-bootstrap/Button';
+import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-const Home = () => {
+const Home = ({user}) => {
+
+    if (!user) {
+        return <Redirect to="/"/>
+    }
+
     return (
         <div>
             <p className="f2 fw6 ph0 mh0 tc mv0">Home</p>
@@ -18,4 +25,8 @@ const Home = () => {
     )
 }
 
-export default Home
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps)(Home); 

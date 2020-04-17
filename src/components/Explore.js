@@ -2,8 +2,10 @@ import React, {useState, useEffect} from 'react';
 import Dropdown from 'react-bootstrap/Dropdown'; 
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
-const Explore = () => {
+const Explore = ({user}) => {
 
     const [state, setState] = useState({
         buildings: [],
@@ -96,6 +98,10 @@ const Explore = () => {
     }
 
     const [rowChoice, setRowChoice] = useState(sites && sites[0] ? sites[0] : {}); 
+
+    if (!user) {
+      return <Redirect to="/" />;
+    }
 
     return (
         <div className="mw9 center ph3-ns">
@@ -232,4 +238,8 @@ const Explore = () => {
     )
 }
 
-export default Explore; 
+const mapStateToProps = state => ({
+    user: state.auth.user
+}); 
+
+export default connect(mapStateToProps)(Explore); 

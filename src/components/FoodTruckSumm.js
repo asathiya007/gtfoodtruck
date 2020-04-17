@@ -3,8 +3,10 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
-const FoodTruckSumm = () => {
+const FoodTruckSumm = ({user}) => {
     const [state, setState] = useState({
         foodTrucks: [],
         stations: [],
@@ -66,6 +68,10 @@ const FoodTruckSumm = () => {
     const [rowChoice, setRowChoice] = useState(foodTrucks[0] ? foodTrucks[0] : {});
 
     const [showDets, setShowDets] = useState(false);
+
+    if (!user) {
+      return <Redirect to="/" />;
+    }
 
     return (
         <div>
@@ -197,4 +203,8 @@ const FoodTruckSumm = () => {
     ); 
 }
 
-export default FoodTruckSumm; 
+const mapStateToProps = state => ({
+    user: state.auth.user
+}); 
+
+export default connect(mapStateToProps)(FoodTruckSumm); 
